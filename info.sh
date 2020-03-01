@@ -13,6 +13,23 @@ cmake --build proto-build --config Release
 cmake --build proto-build --target install
 cmake --build proto-build --config Release --target install
 
+# ====================================================================================
+# run gtest with protobuf
+rmdir proto-build-test /S /Q
+mkdir proto-build-test
+mkdir proto-install-test
+# get gtest submodule..
+cd protobuf-3.11.4
+git submodule update --init --recursive
+cd ..
+
+cmake -S protobuf-3.11.4/cmake -B proto-build-test -DCMAKE_INSTALL_PREFIX=proto-install-test -Dprotobuf_BUILD_TESTS=ON
+cmake --build proto-build-test
+cmake --build proto-build-test --target check > build-check.txt 2>&1
+cmake --build proto-build-test --config Release --target check > build-check-rel.txt 2>&1
+
+# ====================================================================================
+
 proto-install\bin\protoc --version
 set PATH=%PATH%;%cd%\proto-install\bin\
 protoc --version

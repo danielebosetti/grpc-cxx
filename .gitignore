@@ -2,6 +2,7 @@
 /build/
 /proto-build/
 /proto-install/
+/proto-build-test/
 /protobuf-3.11.4/
 
 cx.lnk
